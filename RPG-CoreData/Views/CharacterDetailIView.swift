@@ -48,8 +48,31 @@ struct CharacterDetailView: View {
                 }
 
                 Section("Poder") {
-                    ForEach(powers, id: \.self) { power in
+                    let powersNotSelected = Array(powers).filter { $0.character == nil || $0 == selectedPower }
+                    ForEach(powersNotSelected, id: \.self) { power in
                         HStack {
+                            switch power.name{
+                            case "Supervelocidade":
+                                Image(systemName: "bolt.circle.fill")
+                                    .foregroundStyle(.yellow)
+                            case "Visão de raio lazer":
+                                Image(systemName: "sunglasses")
+                                    .foregroundStyle(.blue)
+                            case "Controle de tempestades":
+                                Image(systemName: "cloud.bolt")
+                                    .foregroundStyle(.orange)
+                            case "Domínio da Terra":
+                                Image(systemName: "mountain.2.fill")
+                                    .foregroundStyle(.green)
+                            case "Em chamas":
+                                Image(systemName: "flame")
+                                    .foregroundStyle(.red)
+                            case "Elasticidade":
+                                Image(systemName: "heat.waves")
+                                    .foregroundStyle(.pink)
+                            default:
+                                Image(systemName: "plus")
+                            }
                             Text(power.name ?? "Sem nome")
                             Spacer()
                             if selectedPower == power {
@@ -124,7 +147,6 @@ struct CharacterDetailView: View {
         // Vincula direto à guilda recebida
             char.guild = guild
 
-       
 
         PersistenceController.shared.save()
         dismiss()
