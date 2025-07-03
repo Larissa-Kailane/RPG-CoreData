@@ -110,10 +110,10 @@ struct CharacterDetailView: View {
     }
 
     private func saveCharacter() {
-        guard selectedItems.count <= 2 else {
-                print("Erro: personagem com mais de 2 itens.")
-                return
-            }
+        if selectedItems.count > 2 {
+               print("Erro: não pode ter mais de 2 itens.")
+               return
+        }
 
         let char = character ?? Character(context: viewContext)
         char.id = char.id ?? UUID()
