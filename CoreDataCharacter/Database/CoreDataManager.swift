@@ -2,6 +2,7 @@ import CoreData
 
 final class CoreDataManager: ObservableObject {
     
+    // Aqui, forma uma variável que deve ser puxada para o preview funcionar
     @MainActor
     static let preview: CoreDataManager = {
         let result = CoreDataManager(inMemory: true)
@@ -22,8 +23,10 @@ final class CoreDataManager: ObservableObject {
         return result
     }()
     
+    // Criação do container
     let container: NSPersistentContainer
 
+    // Quando criarmos o CoreDataManager, ele faz esse código, para vinculo com o banco
     init(inMemory: Bool = false) {
         container = NSPersistentContainer(name: "CoreDataCharacter")
         if inMemory {
@@ -51,8 +54,11 @@ final class CoreDataManager: ObservableObject {
         container.viewContext.automaticallyMergesChangesFromParent = true
     }
     
+    // Função de salvar contexto, depois de criar o manager, pode usar o manager.saveContext(viewContext)
     func saveContext(_ context: NSManagedObjectContext) {
+        // Verifica se o contexto tem mudanças
         if context.hasChanges {
+            // Todo salvamento de contexto precisa de um try catch, pois ele pode dar erros.
             do {
                 try context.save()
             } catch {

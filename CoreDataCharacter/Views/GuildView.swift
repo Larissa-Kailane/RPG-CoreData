@@ -3,6 +3,7 @@ import CoreData
 
 import SwiftUI
 
+// TODO: Tela precisa ser revisada e comentada
 struct GuildView: View  {
     
     @Environment(\.managedObjectContext) var managedObjectContext
