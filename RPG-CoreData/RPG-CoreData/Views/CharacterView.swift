@@ -86,6 +86,12 @@ struct CharacterView: View {
             let character = characters[index]
             viewContext.delete(character)
         }
+        do {
+                try viewContext.save()
+                print("Personagem apagado do banco.")
+            } catch {
+                print("Erro ao salvar após deletar: \(error.localizedDescription)")
+            }
         
     }
 }
