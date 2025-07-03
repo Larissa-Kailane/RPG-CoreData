@@ -77,7 +77,6 @@ struct CharacterDetailView: View {
                         }
                     }
                 }
-
             }
             .navigationTitle(character == nil ? "Novo Personagem" : "Editar Personagem")
             .toolbar {
@@ -110,10 +109,10 @@ struct CharacterDetailView: View {
     }
 
     private func saveCharacter() {
-        if selectedItems.count > 2 {
-               print("Erro: não pode ter mais de 2 itens.")
-               return
-           }
+        guard selectedItems.count <= 2 else {
+                print("Erro: personagem com mais de 2 itens.")
+                return
+        }
 
         let char = character ?? Character(context: viewContext)
         char.id = char.id ?? UUID()
