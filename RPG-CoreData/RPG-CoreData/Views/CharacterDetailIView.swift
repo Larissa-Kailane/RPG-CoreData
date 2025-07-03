@@ -55,7 +55,7 @@ struct CharacterDetailView: View {
                             case "Supervelocidade":
                                 Image(systemName: "bolt.circle.fill")
                             case "Visão de raio lazer":
-                                Image(systemName: "sunglasses", )
+                                Image(systemName: "sunglasses")
                                     
                             case "Controle de tempestades":
                                 Image(systemName: "cloud.bolt")
