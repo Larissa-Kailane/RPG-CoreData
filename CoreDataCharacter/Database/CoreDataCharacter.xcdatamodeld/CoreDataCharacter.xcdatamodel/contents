@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="23788" systemVersion="24F74" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Character" representedClassName="Character" syncable="YES" codeGenerationType="category">
+        <attribute name="age" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="name" attributeType="String"/>
+        <attribute name="title" attributeType="String"/>
+        <relationship name="guild" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Guild" inverseName="characters" inverseEntity="Guild"/>
+        <relationship name="itens" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Item" inverseName="characters" inverseEntity="Item"/>
+        <relationship name="power" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Power" inverseName="character" inverseEntity="Power"/>
+    </entity>
+    <entity name="Guild" representedClassName="Guild" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="characters" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Character" inverseName="guild" inverseEntity="Character"/>
+    </entity>
+    <entity name="Item" representedClassName="Item" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="characters" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Character" inverseName="itens" inverseEntity="Character"/>
+    </entity>
+    <entity name="Power" representedClassName="Power" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="character" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Character" inverseName="power" inverseEntity="Character"/>
+    </entity>
+</model>
