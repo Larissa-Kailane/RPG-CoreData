@@ -78,7 +78,6 @@ struct CharacterDetailView: View {
                         }
                     }
                 }
-
             }
             .navigationTitle(character == nil ? "Novo Personagem" : "Editar Personagem")
             .toolbar {
