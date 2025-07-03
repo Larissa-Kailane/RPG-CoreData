@@ -5,16 +5,18 @@
 //  Created by Larissa Kailane on 02/07/25.
 //
 
+
 import SwiftUI
+import CoreData
 
 @main
 struct RPG_CoreDataApp: App {
-//    let persistenceController = PersistenceController
+    let persistenceController = PersistenceController.shared
 
     var body: some Scene {
         WindowGroup {
             GuildView()
-//                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
 }

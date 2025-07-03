@@ -16,21 +16,22 @@ struct GuildModel: Identifiable {
 }
 
 struct GuildView: View {
-    
-    // Duas guildas pré-definidas
-    let guilds: [GuildModel] = [
-        GuildModel(id: UUID(), name: "Ordem dos bits"),
-        GuildModel(id: UUID(), name: "Clã dos dados")
-    ]
-    
+    @Environment(\.managedObjectContext) var viewContext
+
+    @FetchRequest(
+        entity: Guild.entity(),
+        sortDescriptors: [NSSortDescriptor(keyPath: \Guild.name, ascending: true)]
+    )
+    var guilds: FetchedResults<Guild>
+
     var body: some View {
         NavigationStack {
-            List(guilds) { guild in
+            List(guilds, id: \.self) { guild in
                 NavigationLink {
                     // Quando clica, vai para a tela dos personagens da guilda
-                    CharacterView(guildName: guild.name)
+                    CharacterView(guild: guild)
                 } label: {
-                    Text(guild.name)
+                    Text(guild.name ?? "Sem nome")
                         .font(.headline)
                         .padding(.vertical, 8)
                 }
