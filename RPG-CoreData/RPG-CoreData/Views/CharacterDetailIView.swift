@@ -48,7 +48,8 @@ struct CharacterDetailView: View {
                 }
 
                 Section("Poder") {
-                    ForEach(powers, id: \.self) { power in
+                    let powersNotSelected = Array(powers).filter { $0.character == nil || $0 == selectedPower }
+                    ForEach(powersNotSelected, id: \.self) { power in
                         HStack {
                             Text(power.name ?? "Sem nome")
                             Spacer()
@@ -125,7 +126,6 @@ struct CharacterDetailView: View {
         // Vincula direto à guilda recebida
             char.guild = guild
 
-       
 
         PersistenceController.shared.save()
         dismiss()
