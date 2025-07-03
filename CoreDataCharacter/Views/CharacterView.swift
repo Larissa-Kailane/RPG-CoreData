@@ -8,21 +8,21 @@ struct CharacterView: View  {
     @Environment(\.managedObjectContext) private var viewContext
     @Environment(\.coreDataManager) private var coordinator
     
-    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Character.id, ascending: true)], animation: .default)
-    private var characters: FetchedResults<Character>
+    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Guild.id, ascending: true)], animation: .default)
+    private var guilds: FetchedResults<Guild>
     
     @State private var showAddScreen = false
-    @State private var editCharacter: Character?
+    @State private var editGuild: Guild?
     
     var body: some View {
         NavigationStack {
             List {
-                ForEach(characters, id: \.id) { character in
+                ForEach(guilds, id: \.id) { guild in
                     Button {
-                        editCharacter = character
+                        editGuild = guild
                     } label: {
                         HStack {
-                            Text(character.name)
+                            Text(guild.name)
                             Spacer()
                             Image(systemName: "chevron.right")
                         }
@@ -31,11 +31,11 @@ struct CharacterView: View  {
                 }
                 .onDelete(perform: deleteCharacter)
             }
-            .navigationTitle("<Nome da Guilda>")
+            .navigationTitle("Guildas")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
-                        editCharacter = nil
+                        editGuild = nil
                         showAddScreen = true
                     }) {
                         Image(systemName: "plus")
@@ -47,16 +47,18 @@ struct CharacterView: View  {
             }
             .sheet(isPresented: $showAddScreen) {
                 CharacterSheetView()
+                    .presentationDragIndicator(.visible)
             }
-            .sheet(item: $editCharacter) { character in
-                CharacterSheetView(editedCharacter: character)
+            .sheet(item: $editGuild) { guild in
+                CharacterSheetView(editedGuild: guild)
+                    .presentationDragIndicator(.visible)
             }
         }
     }
     
     func deleteCharacter(at offsets: IndexSet) {
         offsets.forEach { index in
-            let obj = characters[index]
+            let obj = guilds[index]
             viewContext.delete(obj)
         }
         coordinator.saveContext(viewContext)
@@ -64,5 +66,8 @@ struct CharacterView: View  {
 }
 
 #Preview {
-    CharacterView()/*.environment(\.managedObjectContext, CoreDataManager.preview.container.viewContext)*/
+    CharacterView()
+        .environment(\.managedObjectContext, CoreDataManager.preview.container.viewContext)
+        .environment(\.coreDataManager, CoreDataManager.preview)
+    
 }

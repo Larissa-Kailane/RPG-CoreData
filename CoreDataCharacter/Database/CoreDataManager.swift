@@ -7,10 +7,9 @@ final class CoreDataManager: ObservableObject {
         let result = CoreDataManager(inMemory: true)
         let viewContext = result.container.viewContext
         
-        let newChar = Character(context: viewContext)
-        newChar.name = "Test"
-        newChar.age = 10
-        newChar.id = UUID()
+        let newGuild = Guild(context: viewContext)
+        newGuild.name = "Test Guild"
+        newGuild.id = UUID()
         
         do {
             try viewContext.save()

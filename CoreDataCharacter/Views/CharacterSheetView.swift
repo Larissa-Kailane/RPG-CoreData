@@ -8,25 +8,26 @@ struct CharacterSheetView: View {
     @Environment(\.dismiss) var dismiss
     
     @State private var name = ""
-    var editedCharacter: Character?
+    var editedGuild: Guild?
     
     var body: some View {
         NavigationStack {
+            Spacer()
             Form {
                 TextField("Nome", text: $name)
                 .onAppear {
-                    if let character = editedCharacter {
-                        name = character.name
+                    if let guild = editedGuild {
+                        name = guild.name
                     }
                 }
                 Button("Salvar") {
                     
-                    if let character = editedCharacter {
-                        character.name = name
+                    if let guild = editedGuild {
+                        guild.name = name
                     } else {
-                        let character = Character(context: viewContext)
-                        character.id = UUID()
-                        character.name = name
+                        let guild = Guild(context: viewContext)
+                        guild.id = UUID()
+                        guild.name = name
                     }
                     
                     coordinator.saveContext(viewContext)
@@ -36,7 +37,7 @@ struct CharacterSheetView: View {
             }
             .padding(.top, 20)
             .ignoresSafeArea(.all)
-            .navigationTitle(editedCharacter != nil ? "Personagem" : "Novo Personagem")
+            .navigationTitle(editedGuild != nil ? "Personagem" : "Novo Personagem")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -52,10 +53,11 @@ struct CharacterSheetView: View {
 #Preview {
     let viewContext = CoreDataManager.preview.container.viewContext
     
-    let char = Character(context: viewContext)
-    char.name = "Test"
-    char.id = UUID()
-    char.age = 10
+    let guild = Guild(context: viewContext)
+    guild.name = "Teste"
+    guild.id = UUID()
     
-    return CharacterSheetView(editedCharacter: char).environment(\.managedObjectContext, CoreDataManager.preview.container.viewContext)
+    return CharacterSheetView(editedGuild: guild)
+        .environment(\.managedObjectContext, CoreDataManager.preview.container.viewContext)
+        .environment(\.coreDataManager, CoreDataManager.preview)
 }
