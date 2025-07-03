@@ -84,7 +84,6 @@ struct CharacterView: View  {
 
 #Preview {
     // Todo preview para funciona precisa do manager com .preview e contexto para receber o contexto do banco e precisa do .coreDataManager para puxar as funções personalizadas
-
     CharacterView()
         .environment(\.managedObjectContext, CoreDataManager.preview.container.viewContext)
         .environment(\.coreDataManager, CoreDataManager.preview)
