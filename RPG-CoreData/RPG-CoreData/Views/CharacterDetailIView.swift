@@ -50,6 +50,23 @@ struct CharacterDetailView: View {
                 Section("Poder") {
                     ForEach(powers, id: \.self) { power in
                         HStack {
+                            switch power.name{
+                            case "Supervelocidade":
+                                Image(systemName: "bolt.circle.fill")
+                            case "Visão de raio lazer":
+                                Image(systemName: "sunglasses", )
+                                    
+                            case "Controle de tempestades":
+                                Image(systemName: "cloud.bolt")
+                            case "Domínio da Terra":
+                                Image(systemName: "mountain.2.fill")
+                            case "Em chamas":
+                                Image(systemName: "flame")
+                            case "Elasticidade":
+                                Image(systemName: "heat.waves")
+                            default:
+                                Image(systemName: "plus")
+                            }
                             Text(power.name ?? "Sem nome")
                             Spacer()
                             if selectedPower == power {
