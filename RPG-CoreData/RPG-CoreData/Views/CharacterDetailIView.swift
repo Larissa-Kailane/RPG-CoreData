@@ -54,17 +54,22 @@ struct CharacterDetailView: View {
                             switch power.name{
                             case "Supervelocidade":
                                 Image(systemName: "bolt.circle.fill")
+                                    .foregroundStyle(.yellow)
                             case "Visão de raio lazer":
                                 Image(systemName: "sunglasses")
-                                    
+                                    .foregroundStyle(.blue)
                             case "Controle de tempestades":
                                 Image(systemName: "cloud.bolt")
+                                    .foregroundStyle(.orange)
                             case "Domínio da Terra":
                                 Image(systemName: "mountain.2.fill")
+                                    .foregroundStyle(.green)
                             case "Em chamas":
                                 Image(systemName: "flame")
+                                    .foregroundStyle(.red)
                             case "Elasticidade":
                                 Image(systemName: "heat.waves")
+                                    .foregroundStyle(.pink)
                             default:
                                 Image(systemName: "plus")
                             }
