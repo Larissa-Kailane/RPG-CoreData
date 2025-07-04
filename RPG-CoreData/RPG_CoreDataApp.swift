@@ -15,7 +15,7 @@ struct RPG_CoreDataApp: App {
 
     var body: some Scene {
         WindowGroup {
-            GuildView()
+            ContentView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }

@@ -1,18 +1,16 @@
 //
-//  CharacterDetailView.swift
+//  PersonagensDetailView.swift
 //  RPG-CoreData
 //
-//  Created by Larissa Kailane on 02/07/25.
+//  Created by Paulo Henrique Costa Alves on 03/07/25.
 //
 
 import SwiftUI
-import CoreData
 
-struct CharacterDetailView: View {
+struct PersonagensDetailView: View {
     @Environment(\.managedObjectContext) var viewContext
     @Environment(\.dismiss) var dismiss
 
-    let guild: Guild
     var character: Character? // nil = criando novo
 
     @State private var name = ""
@@ -144,8 +142,6 @@ struct CharacterDetailView: View {
         char.age = Int16(age)
         char.power = selectedPower
         char.items = NSSet(set: selectedItems)
-        // Vincula direto à guilda recebida
-        char.guild = guild
 
         PersistenceController.shared.save()
         dismiss()
@@ -153,21 +149,4 @@ struct CharacterDetailView: View {
 
 }
 
-// Componente auxiliar para seleção múltipla
-struct MultipleSelectionRow: View {
-    let title: String
-    let isSelected: Bool
-    let action: () -> Void
 
-    var body: some View {
-        Button(action: action) {
-            HStack {
-                Text(title)
-                Spacer()
-                if isSelected {
-                    Image(systemName: "checkmark")
-                }
-            }
-        }
-    }
-}
